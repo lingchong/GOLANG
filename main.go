@@ -6,8 +6,6 @@ import (
 	method "p1/internal/pkg"
 	// 自定义模块名 + 路径(注意包名和目录保持一致)
 	"p1/internal/utils"
-
-	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -19,12 +17,16 @@ func main() {
 	//打印hello world
 	method.PrintHelloWord()
 
-	//运行 http 服务
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello, World!",
-		})
-	})
-	r.Run() // 监听并在 0.0.0.0:8080 上启动服务
+	v := utils.SafeCount{AY: make([]int, 10)}
+	utils.AddEle(&v)
+	fmt.Printf("%+v\n", v.AY)
+
+	// //运行 http 服务
+	// r := gin.Default()
+	// r.GET("/", func(c *gin.Context) {
+	// 	c.JSON(200, gin.H{
+	// 		"message": "Hello, World!",
+	// 	})
+	// })
+	// r.Run() // 监听并在 0.0.0.0:8080 上启动服务
 }
